@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/user/userSlice";
 
 const Navbar = () => {
+
+  const {onlineUsers} = useSelector((state) => state.userState);
   const dispatch = useDispatch();
 
   const handleTheme = () => {
@@ -15,7 +17,7 @@ const Navbar = () => {
   const numItemsInCart = useSelector((state) => state.cartState.numItemsInCart);
 
   return (
-    <nav className="sticky w-[80%] top-2 z-50 bg-base-200 bg-opacity-40 backdrop-blur-lg shadow-md rounded-xl mx-auto flex justify-center">
+    <nav className="sticky w-[95%] md:w-[80%] lg:w-[80%] top-2 z-50 bg-base-200 bg-opacity-40 backdrop-blur-lg shadow-md rounded-xl mx-auto flex justify-center">
       <div className="navbar align-element">
         {/* START */}
         <div className="navbar-start">
@@ -28,7 +30,10 @@ const Navbar = () => {
           </NavLink>
 
           <div className="dropdown lg:hidden">
-            <label tabIndex={0} className="btn btn-ghost bg-primary bg-opacity-50 ">
+            <label
+              tabIndex={0}
+              className="btn btn-ghost bg-primary bg-opacity-50 "
+            >
               <FaBarsStaggered className="h-6 w-6 text-white" />
             </label>
             <ul
@@ -63,7 +68,16 @@ const Navbar = () => {
         </div>
 
         {/* END */}
-        <div className="navbar-end gap-2">
+        <div className="navbar-end gap-2 ">
+          <div className=" flex items-center justify-center space-x-1 px-3 shadow-md p-3 bg-primary bg-opacity-40 rounded-full">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </span>
+            <p className="text-xs w-[3.6rem] font-light text-white pl-1">
+              {onlineUsers?.length || 1} <span className="">online</span>
+            </p>
+          </div>
           {/* Theme toggle wrapped with dark translucent bg */}
           <div className="rounded-full  bg-primary bg-opacity-40 shadow-lg hover:bg-opacity-20 transition-all backdrop-blur-sm">
             <label className="swap swap-rotate cursor-pointer p-3 flex justify-center items-center">

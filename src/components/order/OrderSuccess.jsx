@@ -280,7 +280,7 @@ export default function PaymentSuccess() {
                       <img
                         src={product?.image?.url}
                         alt={product?.name}
-                        className="w-30 h-30 object-cover rounded-lg border"
+                        className="w-[10rem] h-[10rem] object-cover rounded-lg border"
                       />
                       <div className="flex-1">
                         <p className="font-bold text-xl text-base-content capitalize ">

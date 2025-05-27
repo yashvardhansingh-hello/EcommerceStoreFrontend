@@ -104,6 +104,7 @@ const Dashboard = () => {
 
     const categoriesData = data?.productsByCategory
       const companiesData = data?.productsByCompany
+      console.log(data?.ordersArray);
 
   return isLoading ? (
     <Loading />

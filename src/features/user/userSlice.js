@@ -19,6 +19,7 @@ const getThemeFromLocalStorage = () => {
 const initialState = {
   user: null,
   isAdmin: false,
+  onlineUsers: [],
   user: getUserFromLocalStorage(),
   theme: getThemeFromLocalStorage(),
 };
@@ -41,6 +42,10 @@ const userSlice = createSlice({
       state.user = null;
       localStorage.removeItem('user');
     },
+
+    setOnlineUsers: (state, action) => {
+      state.onlineUsers = action.payload;
+    },
     toggleTheme: (state, action) => {
       const { dracula, winter } = themes;
       state.theme = state.theme === dracula ? winter : dracula;
@@ -51,6 +56,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { loginUser, logoutUser, toggleTheme } = userSlice.actions;
+export const { loginUser, logoutUser, toggleTheme, setOnlineUsers } =
+  userSlice.actions;
 
 export default userSlice.reducer;

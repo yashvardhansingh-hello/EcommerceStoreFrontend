@@ -6,9 +6,10 @@ import { server } from "../../features/config";
 import { useSocketEvents } from "../../hooks/hook";
 import {
   AIRESPONSE,
-  NEW_MESSAGE
+  NEW_MESSAGE,
+  ONLINE_USERS
 } from "../../utils/events";
-import { loginUser, logoutUser } from "../../features/user/userSlice";
+import { loginUser, logoutUser, setOnlineUsers } from "../../features/user/userSlice";
 import axios from "axios";
 
 
@@ -125,8 +126,13 @@ const Chatbot = () => {
     }
   }, []);
 
+  const onlineUsersHandler = useCallback((data) => {
+  dispatch(setOnlineUsers(data));
+  }, []);
+
   const eventHandler = {
     [AIRESPONSE]: aiResponseHandler,
+    [ONLINE_USERS]: onlineUsersHandler,
   };
 
   useSocketEvents(socket?.current, eventHandler);
