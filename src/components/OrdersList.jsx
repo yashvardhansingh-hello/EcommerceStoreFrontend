@@ -16,6 +16,7 @@ import {
 } from "../features/api";
 import { useAsyncMutation, useErrors } from "../hooks/hook";
 import Rating from "./Rating";
+import toast from "react-hot-toast";
 
 const floatingIcons = [
   FaShoppingCart,
@@ -110,7 +111,10 @@ export default function PaymentSuccess() {
     const review = reviewMap[productId + orderId];
     const rating = ratingMap[productId + orderId];
     // console.log(review, rating, productId, orderId)
-    if (!review || !rating) return;
+    if (!review || !rating) {
+      toast.error("Please enter review and rating");
+      return;
+    }
     await rateProductOrder("Review product...", {
       rating,
       review,
