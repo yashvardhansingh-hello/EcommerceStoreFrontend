@@ -8,6 +8,7 @@ import { loginUser } from "../../../features/user/userSlice.js";
 import axios from "axios";
 import { useEffect } from "react";
 import { server } from "../../../features/config.js";
+import Chatbot from "../../../components/AiChatBot/ChatBot.jsx";
 
 const AdminLayout = () => (WrapComp) => {
   return (props) => {
@@ -58,6 +59,8 @@ const AdminLayout = () => (WrapComp) => {
           </div>
           <LeftSidebar />
           <RightSidebar/>
+                <Chatbot />
+          
         </div>
       </>
     );

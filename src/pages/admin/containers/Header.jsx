@@ -16,6 +16,8 @@ import { RIGHT_DRAWER_TYPES } from "../utils/globalConstantUtil";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+    const {onlineUsers} = useSelector((state) => state.userState);
+  
 
   const { theme } = useSelector((state) => state.userState);
   const currentTheme = theme;
@@ -73,6 +75,15 @@ const Header = () => {
             <Bars3Icon className="h-5 inline-block w-5" />
           </label>
           <h1 className="text-2xl font-semibold ml-2">{pageTitle}</h1>
+          <div className=" flex items-center justify-center space-x-1 ml-6  shadow-md p-[10px] bg-primary bg-opacity-40 rounded-full">
+            <span className="relative flex h-2 w-2 md:h-3 md:w-3 lg:h-3 lg:w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 md:h-3 md:w-3 lg:h-3 lg:w-3 bg-green-500"></span>
+            </span>
+            <p className="text-[0.7rem] md:text-sm lg:text-sm w-[6rem] font-light text-white pl-1">
+              {onlineUsers?.length || 1} <span className="">users online</span>
+            </p>
+          </div>
         </div>
 
         <div className="flex-none ">
@@ -143,9 +154,7 @@ const Header = () => {
                 </Link>
               </li>
               <li className="justify-between">
-                <Link to={"/"}>
-                  Website
-                </Link>
+                <Link to={"/"}>Website</Link>
               </li>
               {/* <li className="">
                 <Link to={"/app/settings-billing"}>Bill History</Link>
