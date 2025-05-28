@@ -32,9 +32,9 @@ const Navbar = () => {
           <div className="dropdown lg:hidden">
             <label
               tabIndex={0}
-              className="btn btn-ghost bg-primary bg-opacity-50 "
+              className="btn btn-ghost btn-sm bg-primary bg-opacity-50 "
             >
-              <FaBarsStaggered className="h-6 w-6 text-white" />
+              <FaBarsStaggered className="h-5 w-5 text-white" />
             </label>
             <ul
               tabIndex={0}
@@ -69,18 +69,18 @@ const Navbar = () => {
 
         {/* END */}
         <div className="navbar-end gap-2 ">
-          <div className=" flex items-center justify-center space-x-1 px-3 shadow-md p-3 bg-primary bg-opacity-40 rounded-full">
-            <span className="relative flex h-3 w-3">
+          <div className=" flex items-center justify-center space-x-1  shadow-md p-[10px] bg-primary bg-opacity-40 rounded-full">
+            <span className="relative flex h-2 w-2 md:h-3 md:w-3 lg:h-3 lg:w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 md:h-3 md:w-3 lg:h-3 lg:w-3 bg-green-500"></span>
             </span>
-            <p className="text-xs w-[3.6rem] font-light text-white pl-1">
+            <p className="text-[0.7rem] md:text-sm lg:text-sm w-[3.5rem] font-light text-white pl-1">
               {onlineUsers?.length || 1} <span className="">online</span>
             </p>
           </div>
           {/* Theme toggle wrapped with dark translucent bg */}
           <div className="rounded-full  bg-primary bg-opacity-40 shadow-lg hover:bg-opacity-20 transition-all backdrop-blur-sm">
-            <label className="swap swap-rotate cursor-pointer p-3 flex justify-center items-center">
+            <label className="swap swap-rotate cursor-pointer p-2 md:p-3 lg:p-3 flex justify-center items-center">
               <input type="checkbox" onChange={handleTheme} />
               <BsSunFill className="swap-on w-5 h-5 text-yellow-400" />
               <BsMoonFill className="swap-off w-5 h-5 text-blue-500 text-opacity-100" />
@@ -90,7 +90,7 @@ const Navbar = () => {
           {/* Cart icon with dark translucent bg */}
           <NavLink
             to="/cart"
-            className="btn btn-circle btn-ghost text-white relative shadow-lg bg-primary bg-opacity-40  backdrop-blur-sm"
+            className="btn btn-circle btn-ghost btn-md  text-white relative shadow-lg bg-primary bg-opacity-40  backdrop-blur-sm"
           >
             <div className="indicator">
               <BsCart3 className="h-6 w-6" />
