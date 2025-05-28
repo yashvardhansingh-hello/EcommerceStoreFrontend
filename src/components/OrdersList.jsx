@@ -126,7 +126,7 @@ export default function PaymentSuccess() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-base-100 py-3 px-4 text-neutral-content">
+    <div className="min-h-screen  relative overflow-hidden bg-base-100 py-3 px-0 md:px-4 lg:px-4 text-neutral-content">
       {floatingIcons.map((Icon, i) => (
         <FloatingIcon
           key={i}
@@ -138,7 +138,7 @@ export default function PaymentSuccess() {
       ))}
 
       <div className="max-w-6xl w-full mx-auto mt-6 relative">
-        <div className="w-full mx-auto p-4">
+        <div className="w-full mx-auto p-0 md:p-4 lg:p-4 space-y-3">
           {data?.userOrders?.map((order) => (
             <div
               key={order._id}
@@ -209,13 +209,13 @@ export default function PaymentSuccess() {
                           <img
                             src={product?.image?.url}
                             alt={product?.name}
-                            className="w-[10rem] h-[13rem] object-cover rounded-lg border"
+                            className="w-[5rem] h-[6rem] md:w-[10rem] md:h-[13rem] lg:w-[12rem] lg:h-[13rem] object-cover rounded-lg border"
                           />
-                          <div className="ml-6 flex flex-col justify-center items-start gap-3">
-                            <p className="font-bold text-xl text-base-content capitalize">
+                          <div className="ml-6 flex flex-col justify-center items-start gap-1 md:gap-3 lg:gap-3">
+                            <p className="font-bold text-sm md:text-xl lg:text-xl text-base-content capitalize">
                               {product?.title}
                             </p>
-                            <p className="text-md text-base-content font-extrabold">
+                            <p className="text-sm md:text-xl lg:text-xl  text-base-content font-extrabold">
                               <span className="text-[0.7rem] font-extralight">
                                 a product by
                               </span>{" "}
@@ -231,8 +231,8 @@ export default function PaymentSuccess() {
                           </div>
                         </div>
 
-                        <div className="flex flex-col items-center justify-center p-2 w-full">
-                          <div className="w-full flex flex-col  items-center justify-center gap-4 bg-base-100 p-4 rounded-xl shadow-md">
+                        <div className="flex flex-col items-center justify-center py-1 w-full">
+                          <div className="w-full flex flex-col  items-center justify-center gap-4 bg-base-100 p-2 rounded-xl shadow-md">
                             {item?.productRating === 0 || isEditMode ? (
                               <>
                                 <div className="rating rating-md space-x-1">
@@ -241,7 +241,13 @@ export default function PaymentSuccess() {
                                       key={star}
                                       type="radio"
                                       name={`rating-${product?._id}-${order?._id}`}
-                                      className="mask mask-star-2"
+                                      className={`mask mask-star-2 cursor-pointer ${
+                                        star <=
+                                        (ratingMap[product?._id + order?._id] ??
+                                          item?.productRating)
+                                          ? "bg-yellow-400"
+                                          : "bg-gray-500"
+                                      }`}
                                       onClick={() =>
                                         ratingHandler({
                                           rating: star,
@@ -270,7 +276,9 @@ export default function PaymentSuccess() {
                               <>
                                 {" "}
                                 <Rating value={item?.productRating} size={24} />
-                                <p className="text-sm p-2 text-base-content w-full min-h-12 bg-base-200">{item?.review}</p>
+                                <p className="text-sm p-2 text-base-content w-full min-h-12 bg-base-200">
+                                  {item?.review}
+                                </p>
                                 {/* <textarea
                                   placeholder="Write your review..."
                                   defaultValue={item?.review}
@@ -288,7 +296,7 @@ export default function PaymentSuccess() {
 
                             <div className="gap-6 flex">
                               <button
-                                className="btn btn-primary self-end sm:self-auto"
+                                className="btn btn-sm btn-primary self-end sm:self-auto"
                                 type="button"
                                 onClick={() =>
                                   handleReviewSubmit(product?._id, order?._id)
@@ -297,11 +305,9 @@ export default function PaymentSuccess() {
                                 Submit
                               </button>
                               <button
-                                className="btn btn-primary self-end sm:self-auto"
+                                className="btn btn-sm btn-primary self-end sm:self-auto"
                                 type="button"
-                                onClick={() =>
-                                 setEditMode((pre) => !pre)
-                                }
+                                onClick={() => setEditMode((pre) => !pre)}
                               >
                                 Edit
                               </button>
