@@ -14,6 +14,12 @@ const ThreeDynamics = () => {
             name: "Lalit Lamba",
             desc: "Master's In Computer Science",
           },
+    
+          {
+            src: "/yash.png",
+            name: "Yash Wardhan",
+            desc: "B-TECH Computer Science",
+          },
           {
             src: "/nik.png",
             name: "Nikhil Koshal",
@@ -23,11 +29,6 @@ const ThreeDynamics = () => {
             src: "/paji.PNG",
             name: "Jagdeep Goraya",
             desc: "Master's In Computer Science",
-          },
-          {
-            src: "/yash.png",
-            name: "Yash Wardhan",
-            desc: "B-TECH Computer Science",
           },
         ].map((person, i) => (
           <div
