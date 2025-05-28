@@ -126,9 +126,9 @@ const Chatbot = () => {
     }
   }, []);
 
-  const onlineUsersHandler = useCallback((data) => {
+  const onlineUsersHandler = (data) => {
   dispatch(setOnlineUsers(data));
-  }, []);
+  };
 
   const eventHandler = {
     [AIRESPONSE]: aiResponseHandler,
@@ -137,7 +137,6 @@ const Chatbot = () => {
 
   useSocketEvents(socket?.current, eventHandler);
 
-  const currentPage = window.location.pathname;
 
   const [showGuide, setShowGuide] = useState(true);
   // useEffect(() => {
