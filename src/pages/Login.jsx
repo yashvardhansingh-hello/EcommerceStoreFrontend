@@ -7,26 +7,9 @@ import axios from "axios";
 import { server } from "../features/config";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLazyFetchUserCartQuery } from "../features/api";
+import { setCart } from "../features/cart/cartSlice";
 
-// export const action =
-//   (store) =>
-//   async ({ request }) => {
-//     const formData = await request.formData();
-//     const data = Object.fromEntries(formData);
-
-//     try {
-//       const response = await customFetch.post('/auth/local', data);
-//       store.dispatch(loginUser(response.data));
-//       toast.success('logged in successfully');
-//       return redirect('/');
-//     } catch (error) {
-//       const errorMessage =
-//         error?.response?.data?.error?.message ||
-//         'please double check your credentials';
-//       toast.error(errorMessage);
-//       return null;
-//     }
-//   };
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -37,17 +20,27 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [fetchUserCart] = useLazyFetchUserCartQuery()
+
+
+  const fetchCart = async () => {
+    try {
+      const triggerFetch = await fetchUserCart().unwrap(); // properly unwrap lazy query
+      dispatch(setCart(triggerFetch?.cartData?.products || []));
+    } catch (error) {
+      console.error("Failed to fetch cart:", error);
+    }
+  };
+  
+
   const loginHandler = async (e) => {
     e.preventDefault();
-
     const toastId = toast.loading("Signing In...");
-
 
     const config = {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
-        // 'Authorization': 'Bearer ' + token
       },
     };
 
@@ -57,15 +50,21 @@ const Login = () => {
         { email, password },
         config
       );
+
       dispatch(loginUser(data.user));
       toast.success(data?.message, { id: toastId });
-      navigate('/')
+
+      // Wait for cart to fetch before navigating
+      await fetchCart();
+
+      navigate("/");
     } catch (err) {
       toast.error(err?.response?.data?.message || "something went wrong !", {
         id: toastId,
       });
     }
   };
+  
 
   const loginAsGuestUser = async () => {
      navigate('/')

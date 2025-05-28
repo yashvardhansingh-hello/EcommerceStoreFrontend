@@ -360,4 +360,5 @@ export const {
   useAdminOrdersDataQuery,
   useTopSellingProductsUserQuery,
   useUpdateUserPreferencesMutation,
+  useLazyFetchUserCartQuery,
 } = api;

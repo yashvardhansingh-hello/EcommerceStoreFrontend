@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useAsyncMutation } from "../hooks/hook";
 import { useLogoutUserMutation } from "../features/api";
+import { clearCart } from "../features/cart/cartSlice";
 // import { useQueryClient } from '@tanstack/react-query';
 
 const Header = () => {
@@ -26,6 +27,7 @@ const Header = () => {
   const handleLogout = async () => {
     await logoutHandler("logging out...", {});
     dispatch(logoutUser());
+    dispatch(clearCart());
     navigate("/login");
   };  
 
