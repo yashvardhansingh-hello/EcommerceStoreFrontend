@@ -75,14 +75,30 @@ const Header = () => {
             <Bars3Icon className="h-5 inline-block w-5" />
           </label>
           <h1 className="text-2xl font-semibold ml-2">{pageTitle}</h1>
-          <div className=" flex items-center justify-center space-x-1 ml-6  shadow-md p-[10px] bg-primary bg-opacity-40 rounded-full">
+
+          <div className="group flex items-center transition-all duration-500 z-10 ml-6 cursor-pointer justify-center space-x-1 shadow-md p-[10px] bg-primary bg-opacity-40 rounded-full relative">
             <span className="relative flex h-2 w-2 md:h-3 md:w-3 lg:h-3 lg:w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 md:h-3 md:w-3 lg:h-3 lg:w-3 bg-green-500"></span>
             </span>
-            <p className="text-[0.7rem] md:text-sm lg:text-sm w-[6rem] font-light text-white pl-1">
-              {onlineUsers?.length || 1} <span className="">users online</span>
+            <p className="text-[0.7rem] md:text-sm lg:text-sm  font-light text-white pl-1">
+              {onlineUsers?.length || 1} <span className="">user online </span>
             </p>
+
+            {/* Hoverable name list */}
+            <div
+              id="users-name"
+              className="hidden group-hover:flex z-10 absolute top-[3.5rem] left-0 flex-col items-center justify-center bg-primary bg-opacity-40 shadow-md transition-all duration-500 p-2 rounded-md"
+            >
+              {onlineUsers?.map((user) => (
+                <p
+                  key={user.id}
+                  className="text-[0.7rem] md:text-sm lg:text-sm w-[8rem] text-base-100"
+                >
+                  {user.name}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
 
