@@ -43,6 +43,13 @@ const Header = () => {
             >
               logout
             </button>
+            {user.role == "admin" && <button
+              className="btn btn-xs btn-outline btn-primary "
+              onClick={() => navigate("/admin/dashboard")}
+            >
+              Admin
+            </button>
+}
           </div>
         ) : (
           <div className="flex gap-x-6 justify-center items-center">

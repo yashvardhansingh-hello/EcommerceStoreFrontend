@@ -9,6 +9,7 @@ const Navbar = () => {
 
   const {onlineUsers} = useSelector((state) => state.userState);
   const dispatch = useDispatch();
+  const {user} = useSelector((state) => state.userState);
 
   const handleTheme = () => {
     dispatch(toggleTheme());
@@ -17,8 +18,8 @@ const Navbar = () => {
   const numItemsInCart = useSelector((state) => state.cartState.numItemsInCart);
 
   return (
-    <nav className="sticky w-[95%] md:w-[80%] lg:w-[80%] top-2 z-50 bg-base-200 bg-opacity-40 backdrop-blur-lg shadow-md rounded-xl mx-auto flex justify-center">
-      <div className="navbar align-element">
+    <nav className="sticky w-[95%] md:w-[90%] lg:w-[90%] top-2 z-50 bg-base-200 bg-opacity-40 backdrop-blur-lg shadow-lg rounded-xl mx-auto flex justify-space-between my-2">
+      <div className="navbar p-3">
         {/* START */}
         <div className="navbar-start">
           <NavLink
@@ -79,19 +80,24 @@ const Navbar = () => {
             </p>
 
             {/* Hoverable name list */}
-            <div
+          {user?.role === "admin" &&  <div
               id="users-name"
-              className="hidden group-hover:flex z-10 absolute top-[3.5rem] left-0 flex-col items-center justify-center bg-primary bg-opacity-40 shadow-md transition-all duration-500 p-2 rounded-md"
+              className="hidden group-hover:flex absolute top-[3.5rem] left-0 z-10 flex-col gap-1 items-start bg-primary bg-opacity-45 shadow-lg transition-all duration-300 p-3 rounded-lg w-max"
             >
-              {onlineUsers?.map((user) => (
+              {onlineUsers?.map((usr) => (
                 <p
-                  key={user.id}
-                  className="text-[0.7rem] md:text-sm lg:text-sm w-[8rem] text-base-100"
+                  key={usr.id}
+                  className="text-[0.7rem]  font-normal text-base-100 whitespace-nowrap"
                 >
-                  {user.name}
+                  {usr.name}{" "}
+                  {usr.role === "admin" && (
+                    <span className="ml-1  text-red-400">
+                      (Admin)
+                    </span>
+                  )}
                 </p>
               ))}
-            </div>
+            </div>}
           </div>
 
           {/* Theme toggle wrapped with dark translucent bg */}

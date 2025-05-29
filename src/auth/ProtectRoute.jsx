@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectRoute = ({ children, user = true, redirect = "/login" }) => {
   if (!user) return <Navigate to={redirect}></Navigate>;
-  if(user.role == "admin") return <Navigate to={"/admin/dashboard"}> </Navigate>
+  // if(user.role == "admin") return <Navigate to={"/admin/dashboard"}> </Navigate>
   return children ? children : <Outlet />;
   // outlet will replace the page according to route if children is not there. ...
 };

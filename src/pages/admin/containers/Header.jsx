@@ -17,6 +17,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
     const {onlineUsers} = useSelector((state) => state.userState);
+    const {user} = useSelector((state) => state.userState);
   
 
   const { theme } = useSelector((state) => state.userState);
@@ -86,19 +87,24 @@ const Header = () => {
             </p>
 
             {/* Hoverable name list */}
-            <div
-              id="users-name"
-              className="hidden group-hover:flex z-10 absolute top-[3.5rem] left-0 flex-col items-center justify-center bg-primary bg-opacity-40 shadow-md transition-all duration-500 p-2 rounded-md"
-            >
-              {onlineUsers?.map((user) => (
-                <p
-                  key={user.id}
-                  className="text-[0.7rem] md:text-sm lg:text-sm w-[8rem] text-base-100"
-                >
-                  {user.name}
-                </p>
-              ))}
-            </div>
+            {user?.role === "admin" && (
+              <div
+                id="users-name"
+                className="hidden group-hover:flex absolute top-[3.5rem] left-0 z-10 flex-col gap-1 items-start bg-primary bg-opacity-45 shadow-lg transition-all duration-300 p-3 rounded-lg w-max"
+              >
+                {onlineUsers?.map((usr) => (
+                  <p
+                    key={usr.id}
+                    className="text-[0.7rem]  font-normal text-base-100 whitespace-nowrap"
+                  >
+                    {usr.name}{" "}
+                    {usr.role === "admin" && (
+                      <span className="ml-1  text-red-400">(Admin)</span>
+                    )}
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
