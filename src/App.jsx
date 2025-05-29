@@ -38,6 +38,7 @@ import SingleProductAdmin from "./pages/admin/database/Product/SingleProductAdmi
 import Transactions from "./pages/admin/transactions/Transaction.jsx";
 import PaymentSuccess from "./components/order/OrderSuccess.jsx";
 import PaymentCancel from "./components/order/OrderFail.jsx";
+import AdminProtectedRoute from "./auth/AdminProtectedRoute.jsx";
 
 const App = () => {
   const { user } = useSelector((state) => state.userState);
@@ -132,7 +133,7 @@ const App = () => {
             }
           />
 
-          {/* <Route element={<ProtectRoute user={user} isAdmin={isAdmin}/>}> */}
+          <Route element={<AdminProtectedRoute user={user} />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/transactions" element={<Transactions />} />
           <Route path="/admin/product" element={<Product />} />
@@ -146,7 +147,7 @@ const App = () => {
           <Route path="/admin/company/:id" element={<SingleCompany />} />
           <Route path="/admin/analytics" element={<Analytics />} />
           <Route path="/admin/settings" element={<Settings />} />
-          {/* </Route> */}
+          </Route>
 
           <Route path="*" element={<NotFound />} />
         </Routes>
