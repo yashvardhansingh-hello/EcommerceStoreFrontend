@@ -90,6 +90,10 @@ const WelcomePreferenceModal = ({ isOpen, onClose, onSave }) => {
   const { user } = useSelector((state) => state.userState);
   if (!isOpen) return null;
 
+
+  const screenWidth = window.innerWidth;
+  let isMobile = screenWidth <= 640;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="bg-white/10 backdrop-blur-2xl border border-white/30 rounded-3xl p-8 w-full max-w-4xl mx-4 shadow-2xl relative text-base-content">
@@ -129,7 +133,7 @@ const WelcomePreferenceModal = ({ isOpen, onClose, onSave }) => {
             </h3>
           </div>
           <div className="flex flex-wrap gap-2 text-xs md:text-sm lg:text-md">
-            {categories?.slice(1, categories.length).map((cat) => (
+            {categories?.slice(1, isMobile ? 9 : categories.length).map((cat) => (
               <button
                 key={cat._id}
                 onClick={() => toggleSelection("category", cat)}
@@ -153,19 +157,21 @@ const WelcomePreferenceModal = ({ isOpen, onClose, onSave }) => {
             </h3>
           </div>
           <div className="flex flex-wrap gap-2 text-xs md:text-sm lg:text-md">
-            {companies?.slice(1, 10).map((comp) => (
-              <button
-                key={comp._id}
-                onClick={() => toggleSelection("company", comp)}
-                className={`px-4 py-2 rounded-full border ${
-                  selectedCompanies.includes(comp)
-                    ? "bg-primary text-white border-primary"
-                    : "bg-white/20 text-white border-white/30"
-                } hover:bg-primary hover:text-white transition`}
-              >
-                {comp.name}
-              </button>
-            ))}
+            {companies
+              ?.slice(1, isMobile ? 8 : companies.length)
+              .map((comp) => (
+                <button
+                  key={comp._id}
+                  onClick={() => toggleSelection("company", comp)}
+                  className={`px-4 py-2 rounded-full border ${
+                    selectedCompanies.includes(comp)
+                      ? "bg-primary text-white border-primary"
+                      : "bg-white/20 text-white border-white/30"
+                  } hover:bg-primary hover:text-white transition`}
+                >
+                  {comp.name}
+                </button>
+              ))}
           </div>
         </div>
 
