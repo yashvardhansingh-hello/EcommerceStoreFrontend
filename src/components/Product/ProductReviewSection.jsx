@@ -74,7 +74,7 @@ const ProductReviewSection = ({ product }) => {
               </span>
             </div>
             {review?.message && (
-              <p className="text-gray-800 my-2">{review.message}</p>
+              <p className="text-base-content my-2">{review.message}</p>
             )}
 
           

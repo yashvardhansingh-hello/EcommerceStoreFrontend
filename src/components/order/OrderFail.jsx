@@ -133,20 +133,24 @@ export default function PaymentCancel() {
         />
       ))}
 
-     {showSuccess && <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm z-50 flex items-center justify-center animate-fade-in">
-        <div className="text-center animate-bounce-in flex flex-col justify-center items-center">
-          <Lottie
-            loop
-            animationData={CancelAnimation}
-            play
-            style={{ width: 300, height: 300 }}
-          />
-          <h1 className="text-3xl font-bold text-red-400">Payment Canceled!</h1>
-          <p className="text-sm mt-2">
-            Something went wrong. Please try again.
-          </p>
+      {showSuccess && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm z-50 flex items-center justify-center animate-fade-in">
+          <div className="text-center animate-bounce-in flex flex-col justify-center items-center">
+            <Lottie
+              loop
+              animationData={CancelAnimation}
+              play
+              style={{ width: 300, height: 300 }}
+            />
+            <h1 className="text-3xl font-bold text-red-400">
+              Payment Canceled!
+            </h1>
+            <p className="text-sm mt-2">
+              Something went wrong. Please try again.
+            </p>
+          </div>
         </div>
-      </div>}
+      )}
 
       <div className="max-w-6xl mx-auto mt-6 space-y-6 z-10 relative">
         <div className="text-center mb-10 flex flex-col justify-center items-center">
@@ -222,29 +226,38 @@ export default function PaymentCancel() {
               <h3 className="text-xl font-semibold text-base-content mb-3">
                 Items in Cart
               </h3>
-              <div className="space-y-4">
-                {order.products?.map((item, idx) => {
+              <div className="space-y-3">
+                {order?.products?.map((item, idx) => {
                   const product = item.productId;
                   return (
                     <div
                       key={idx}
-                      className="flex items-center gap-4 p-3 border border-base-300 rounded-lg bg-base-200"
+                      className="flex gap-4 p-3 border border-base-300 rounded-lg bg-base-200"
                     >
-                      <img
-                        src={product?.image?.url}
-                        alt={product?.name}
-                        className="w-[10rem] h-[10rem] object-cover rounded-lg border"
-                      />
-                      <div className="flex-1">
-                        <p className="font-bold text-xl text-base-content capitalize ">
-                          {product?.title}
-                        </p>
-                        <p className="text-sm text-base-content/70">
-                          Quantity: {item.quantity}
-                        </p>
-                        <p className="text-sm text-base-content/70 font-bold">
-                          Price: ${item.price}
-                        </p>
+                      <div className="flex items-center w-full">
+                        <img
+                          src={product?.image?.url}
+                          alt={product?.name}
+                          className="w-[5rem] h-[6rem] md:w-[10rem] md:h-[13rem] lg:w-[12rem] lg:h-[13rem] object-cover rounded-lg border"
+                        />
+                        <div className="ml-6 flex flex-col justify-center items-start gap-1 md:gap-3 lg:gap-3">
+                          <p className="font-bold text-sm md:text-xl lg:text-xl text-base-content capitalize">
+                            {product?.title}
+                          </p>
+                          <p className="text-sm md:text-xl lg:text-xl  text-base-content font-extrabold">
+                            <span className="text-[0.7rem] font-extralight">
+                              a product by
+                            </span>{" "}
+                            {product?.company?.name}
+                          </p>
+                          <p className="text-sm text-base-content/70">
+                            <span className="font-bold">Quantity: </span>{" "}
+                            {item?.quantity}
+                          </p>
+                          <p className="text-sm text-base-content/70 font-bold">
+                            Price: ${item?.price}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   );
