@@ -1,3 +1,4 @@
+import { redirect, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   FaRobot,
@@ -65,6 +66,7 @@ const FloatingIcon = ({ Icon, style, scrollY, index }) => {
 };
 
 const About = () => {
+  const navigate = useNavigate();
   const [isPageLoading, setPageLoading] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const [positions] = useState(generatePositions());
@@ -87,6 +89,10 @@ const About = () => {
     const timer = setTimeout(() => setPageLoading(false), 300);
     return () => clearTimeout(timer);
   }, []);
+
+  const loginAsGuestUser = async () => {
+    navigate("/");
+  };
 
   return isPageLoading ? (
     <Loading />
@@ -115,7 +121,6 @@ const About = () => {
       </section>
       <section className="w-full relative z-0">
         <div className="backdrop-blur-lg p-12 py-[5rem] my-2 shadow-xl relative z-3">
-
           <div className="flex items-center justify-center gap-3 mb-8">
             <FaCogs className="text-primary text-2xl" />
             <h2 className="text-4xl font-bold">Powered By</h2>
@@ -219,7 +224,12 @@ const About = () => {
             shop. We aren't just another platform — we're your gateway to
             next-gen commerce.
           </p>
-          <button className="btn btn-primary btn-wide">Explore Nox Cart</button>
+          <button
+            className="btn btn-primary btn-wide"
+            onClick={loginAsGuestUser}
+          >
+            Explore Nox Cart
+          </button>
         </div>
       </section>
     </div>
